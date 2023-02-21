@@ -4,6 +4,10 @@
   "scripts": {
     "build": "remix build",
     "dev": "docker compose -f docker-compose.yml -f docker-compose-dev.yml --env-file .env.development up -d",
+    "prod": "docker compose -f docker-compose.yml -f docker-compose-prod.yml --env-file .env.production up -d --build",
+    "dump": "TASK=dump node scripts/database.mjs",
+    "migrate": "TASK=migrate node scripts/database.mjs",
+    "stop": "docker compose -f docker-compose.yml -f docker-compose-dev.yml --env-file .env.development down && docker compose -f docker-compose.yml -f docker-compose-prod.yml --env-file .env.production down",
     "start": "remix-serve build"
   },
   "dependencies": {
