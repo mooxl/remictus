@@ -1,53 +1,25 @@
-# Welcome to Remix!
+# Remictus
 
-- [Remix Docs](https://remix.run/docs)
+Remictus is a pre-configured setup for Directus and Remix that makes it easy to get started with building your webapp. With Remictus, you'll have a complete development environment that you can run locally using Docker. This makes it easy to test and develop your webapp before deploying it to a production environment.
+
+When you're ready to deploy the webapp on your own server, Remictus comes with a production environment that requires the use of Traefik as a reverse proxy. This setup provides a secure and scalable production environment for your webapp.
+
+## Getting started
+
+To get started with Remictus, you'll need to have Docker and NPM || Yarn || PNPM installed on your machine.
+
+1. Clone this repository: `git clone https://github.com/mooxl/remictus.git`
+2. Change into the repository directory: `cd remictus`
+3. Start the containers: `yarn dev`
+
+This will start up the Directus, Database and Remix containers and make them available on your local machine. The site will be served at http://localhost:3000 and the Directus will be available at http://localhost:8055.
 
 ## Development
 
-From your terminal:
+The `docker-compose.yml` file includes both the Directus and Remix containers and sets up everything to run the containers. The containers use the environment variables declared in the `.env.development` file and mounted volumes to store data persistently even after the containers are stopped and started.
 
-```sh
-npm run dev
-```
+## Production
 
-This starts your app in development mode, rebuilding assets on file changes.
+When you're ready to deploy your webapp to a production environment, you'll should copy the `.env.development` and rename it into `.env.production`. The you modify the file to suit your needs. This file contains the configuration for the Traefik reverse proxy and Directus and Remix.
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+Once you've modified the `.env.production`, you can run the following command to deploy your webapp to a production environment: `yarn prod`
