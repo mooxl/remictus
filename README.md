@@ -11,6 +11,7 @@ To get started with Remictus, you'll need to have Docker and NPM || Yarn || PNPM
 1. Clone this repository: `git clone https://github.com/mooxl/remictus.git`
 2. Change into the repository directory: `cd remictus`
 3. Start the containers: `yarn dev`
+4. Migrate the data: `NODE_ENV=development yarn migrate`
 
 This will start up the Directus, Database and Remix containers and make them available on your local machine. The site will be served at http://localhost:3000 and the Directus will be available at http://localhost:8055.
 
@@ -23,3 +24,24 @@ The `docker-compose.yml` file includes both the Directus and Remix containers an
 When you're ready to deploy your webapp to a production environment, you'll should copy the `.env.development` and rename it into `.env.production`. The you modify the file to suit your needs. This file contains the configuration for the Traefik reverse proxy and Directus and Remix.
 
 Once you've modified the `.env.production`, you can run the following command to deploy your webapp to a production environment: `yarn prod`
+
+## Migrate data from dev to prod
+
+This project has two commands for that in its package.json file:
+
+- dump: creates a database dump of the existing database
+- migrate: migrates the data from the created dump
+
+Before using either of these commands, you must provide a `NODE_ENV`. This can either be `production` or `development`. For example, to create a database dump in production environment, you would run:
+
+```bash
+NODE_ENV=production yarn dump
+```
+
+To migrate the data in the development environment, you would run:
+
+```bash
+NODE_ENV=development npm run migrate
+```
+
+Make sure to replace production and development with the appropriate environment for your needs.
