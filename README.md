@@ -29,8 +29,8 @@ Once you've modified the `.env.production`, you can run the following command to
 
 This project has two commands for that in its package.json file:
 
-- dump: creates a database dump of the existing database
-- migrate: migrates the data from the created dump
+- `dump`: creates a database dump of the existing database
+- `migrate`: migrates the data from the created dump
 
 Before using either of these commands, you must provide a `NODE_ENV`. This can either be `production` or `development`. For example, to create a database dump in production environment, you would run:
 
