@@ -1,11 +1,5 @@
 import LRUCache from "lru-cache";
 
-let cache: LRUCache<unknown, any>;
-
-declare global {
-  var __cache: LRUCache<unknown, any> | undefined;
-}
-
 const options = {
   max: 500,
   maxSize: 5000,
@@ -13,13 +7,5 @@ const options = {
   allowStale: true,
   sizeCalculation: (value: any) => Buffer.byteLength(JSON.stringify(value)),
 };
-if (process.env.NODE_ENV === "development") {
-  if (!global.__cache) {
-    global.__cache = new LRUCache(options);
-  }
-  cache = global.__cache;
-} else {
-  cache = new LRUCache(options);
-}
 
-export { cache };
+export const cache = new LRUCache(options);
