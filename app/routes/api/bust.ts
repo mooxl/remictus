@@ -1,7 +1,6 @@
-import type { LoaderArgs } from "@remix-run/node";
 import { cache } from "~/utils/lru.server";
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async () => {
   cache.clear();
   console.log("Cache cleared");
   return null;
